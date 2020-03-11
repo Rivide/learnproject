@@ -1,0 +1,73 @@
+{% extends "base_generic.html" %}
+
+{% block title %}<title>New Article</title>{% endblock %}
+{% block style %}
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet">
+{% endblock %}
+{% block main %}
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://blueimp.github.io/jQuery-File-Upload/js/vendor/jquery.ui.widget.js"></script>
+<script src="https://blueimp.github.io/jQuery-File-Upload/js/jquery.fileupload.js"></script>
+
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.js"></script>
+
+<!-- summernote-math -->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
+{% load static %}
+<script src="{% static 'learn/summernote-math-master/summernote-math.js' %}"></script>-->
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.title }}
+    <div class="summernote-wrapper" id="summernote-wrapper">{{ form.body|safe }}</div>
+    <input type="submit" name="Submit">
+</form>
+<p>When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c = 0\) and they are
+    $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$</p>
+<table><tbody><tr><td>Statements</td><td>Reasons</td></tr><tr><td>1. ABC</td><td>1. Given</td></tr></tbody></table>
+<!-- MathJax -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>
+    /*console.log(MathJax);
+    setTimeout(function() {
+        console.log(MathJax.Hub);
+    }, 2000);
+    MathJax.Hub.Config({
+        extensions: ["tex2math.js"],
+        jax: ["input/TeX", "output/HTML-CSS"]
+    });*/
+    /*$(document).ready(function() {
+        $('.summernote-wrapper').summernote({
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['fontname', ['fontname']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video', 'math']],
+                ['view', ['fullscreen', 'codeview', 'help']]
+            ]
+        });
+        function setup()
+        {
+            let editorText = $('.note-editable textarea').text();
+            if (editorText.length > 0) {
+                console.log(editorText);
+                $('#summernote-wrapper').summernote('code', editorText);
+            }
+            else {
+                requestAnimationFrame(setup);
+            }
+        }
+        requestAnimationFrame(setup)
+    });*/
+</script>
+{% endblock %}

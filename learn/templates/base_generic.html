@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+    <head>
+        {% block title %}{% endblock %}
+        {% block style %}{% endblock %}
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    </head>
+    <body>
+        <header>
+            <nav>
+                <h1 class="headerheading">Learn</h1>
+                <ul class="links">
+                    <li><a href><div>Sign up</div></a>
+                    </li><li><a href><div>Log in</div></a></li>
+                </ul>
+                <span class="navicon">
+                    <span class="navrect"></span>
+                    <span class="navrect"></span>
+                    <span class="navrect last"></span>
+                    <div class="dropdown-nav">
+                    </div>
+                </span>
+            </nav>
+        </header>
+        <div class="main">
+            {% block main %}{% endblock %}
+        </div>
+
+    </body>
+</html>

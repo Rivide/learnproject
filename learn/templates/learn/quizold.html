@@ -1,0 +1,12 @@
+{% extends "base_generic.html" %}
+
+{% block title %}<title>Learn</title>{% endblock %}
+{% block main %}
+    <h2 class="heading">Translate</h2>
+    <textarea disabled id="qprompt" class="quizinput quizprompt lightblue" rows="2">{{ question.prompt }}</textarea>
+    <textarea id="qinput" class="quizinput" rows="8"></textarea>
+    <button class="submit quizinput">Submit</button>
+    <script>
+        var answers = {{ question.answer_set.all }}
+    </script>
+{% endblock %}

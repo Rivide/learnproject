@@ -1,0 +1,30 @@
+{% extends "base_generic.html" %}
+
+{% block title %}<title>Learn</title>{% endblock %}
+{% block main %}
+    <h2 class="heading">Translate</h2>
+    {% load filters %}
+    <div class="quiz-wrapper {% if form.questionclosed.value %}{% if incorrect %}incorrect{% else %}correct{% endif %}{% elif incorrect %}retry{% endif %}">
+        <div class="question-wrapper">
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form.prompt }}
+                {{ form.answer }}
+                {{ form.questionclosed }}
+                <input class="submit" type="submit" value="Submit">
+            </form>
+        </div>{% if form.questionclosed.value or incorrect %}<div class="feedback-wrapper">
+                <h3>{% if incorrect %}Incorrect!{% else %}Correct!{% endif %}</h3>
+                    {% if answers %}
+                        These are the acceptable answers:
+                        <ul>
+                        {% for answer in answers %}
+                            <li>"{{ answer }}"</li>
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+            </div>
+        {% endif %}
+    </div>
+    {{ score }}
+{% endblock %}

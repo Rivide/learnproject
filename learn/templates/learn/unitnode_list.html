@@ -1,0 +1,49 @@
+{% extends "base_generic.html" %}
+
+{% block title %}<title>Learn</title>{% endblock %}
+{% block main %}
+    <h2 class="heading">{{ language }}</h2>
+    <div class="unitlist">
+        
+        {% for unit in unitnode_list %}
+        <div class="unit"><div class="unit-child">{{ unit.name }}</div>
+        
+            {% for topic in unit.topicnode_set.all %}
+            <div class="topic"><div class="topic-child">{{ topic.name }}</div>
+                {% for practice in topic.practicenode_set.all %}
+                <div class="practice"><a href="{{ practice.get_absolute_url }}" class="practice-child"></a></div>
+                {% endfor %}
+            </div>
+        
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+    <script>
+        var units = document.getElementsByClassName("unit");
+        var unitRadius = parseInt(getComputedStyle(units[0]).getPropertyValue("width")) / 2;
+        var topicRadius = parseInt(getComputedStyle(units[0].children[1]).getPropertyValue("width")) / 2;
+        var practiceRadius = parseInt(getComputedStyle(units[0].children[1].children[1]).getPropertyValue("width")) / 2;
+        var unitTopicGap = 50;
+        var topicPracticeGap = 20;
+        
+        for (var i = 0; i < units.length; i++) {
+            var topics = [].slice.call(units[i].children, 1);
+            circularPattern(units[i], topics, unitRadius + topicRadius + practiceRadius * 2 + unitTopicGap)
+            for (var j = 0; j < topics.length; j++) {
+                var practices = [].slice.call(topics[j].children, 1);
+                circularPattern(topics[j], practices, topicRadius + practiceRadius + topicPracticeGap)
+            }
+        }
+        function circularPattern(parent, children, orbitRadius) {
+                for (var i = 0; i < children.length; i++) {
+                    var ang = 2 * Math.PI / children.length * i - Math.PI / 2;
+                    var x = Math.round(Math.cos(ang) * orbitRadius);
+                    var y = Math.round(Math.sin(ang) * orbitRadius);
+                    var style = getComputedStyle(children[i]);
+                    children[i].style.left = parseInt(style.getPropertyValue('left')) + x + "px";
+                    children[i].style.top = parseInt(style.getPropertyValue('top')) + y + "px";
+                }
+        }
+    </script>
+{% endblock %}

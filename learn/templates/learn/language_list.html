@@ -1,0 +1,9 @@
+{% extends "base_generic.html" %}
+
+{% block title %}<title>Learn</title>{% endblock %}
+{% block main %}
+    <h2 class="heading">Choose a subject</h2>
+        <ul class="languages">
+            {% for lang in language_list %}<li><a href="{{ lang.get_absolute_url }}">{{ lang }}</a></li>{% endfor %}
+        </ul>
+{% endblock %}
